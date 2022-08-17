@@ -15,7 +15,7 @@ const Nav = () => {
           <a>Home</a>
         </Link>
 
-        <Link href="/product">
+        <Link href="/products/">
           <a>Categories</a>
         </Link>
 
