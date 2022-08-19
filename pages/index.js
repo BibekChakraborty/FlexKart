@@ -62,6 +62,7 @@ export default function Home() {
         </div>
       </nav>
 
+      
       <div>
         <Image src={landingimg} alt="" />
       </div>
