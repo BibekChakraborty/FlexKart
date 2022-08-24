@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Head from "next/head";
+import Script from "next/script";
 
 import { SessionProvider } from "next-auth/react";
 export default function App({
@@ -9,10 +10,10 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <Head>
-        <script
+        <Script
           src="https://kit.fontawesome.com/97cafe4b3f.js"
           crossOrigin="anonymous"
-        ></script>
+        ></Script>
       </Head>
       <Component {...pageProps} />
     </SessionProvider>
