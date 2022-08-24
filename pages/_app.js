@@ -9,12 +9,12 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Head>
+      
         <Script
           src="https://kit.fontawesome.com/97cafe4b3f.js"
           crossOrigin="anonymous"
         ></Script>
-      </Head>
+      
       <Component {...pageProps} />
     </SessionProvider>
   );
