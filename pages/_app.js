@@ -1,8 +1,13 @@
 import "../styles/globals.css";
 import Head from "next/head";
-function MyApp({ Component, pageProps }) {
+
+import { SessionProvider } from "next-auth/react";
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <>
+    <SessionProvider session={session}>
       <Head>
         <script
           src="https://kit.fontawesome.com/97cafe4b3f.js"
@@ -10,8 +15,6 @@ function MyApp({ Component, pageProps }) {
         ></script>
       </Head>
       <Component {...pageProps} />
-    </>
+    </SessionProvider>
   );
 }
-
-export default MyApp;

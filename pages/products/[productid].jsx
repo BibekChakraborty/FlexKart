@@ -1,38 +1,54 @@
-import React, { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Nav from "../../Components/nav";
 import Footer from "../../Components/footer";
 import { useRouter } from "next/router";
-import Image from "next/image";
-
-const imgc = [
-  "https://comicsense.b-cdn.net/wp-content/uploads/2021/03/7th_hokage1_copy_compressed.jpg",
-  "https://comicsense.b-cdn.net/wp-content/uploads/2021/03/7th_hokage2_copy_compressed.jpg",
-  "https://comicsense.b-cdn.net/wp-content/uploads/2021/03/7th_hokage3_compressed.jpg",
-  "https://comicsense.b-cdn.net/wp-content/uploads/2021/03/7th_hokage4_compressed.jpg",
-];
 
 const Items = () => {
+  const router = useRouter();
+  const imageRef = useRef();
+  const [data, setData] = useState(null);
+  const [quantity, setQuantity] = useState(0);
+  const [carttext, setCarttext] = useState("Add to Cart");
+  const [count, setCount] = useState(0);
 
-  const imageRef=useRef();
-  
+  const fetchData = async () => {
+    const res = await fetch(`/api/product/${router.query.productid}`);
+    const data = await res.json();
+
+    if (res.status !== 200) return setData({ ...data, error: true });
+
+    data.image = JSON.parse(data.image);
+    data.description = JSON.parse(data.description);
+
+    setData(data);
+  };
+
+  useEffect(() => {
+    router.isReady && fetchData();
+  }, [router]);
+
+  if (!data) return null;
+
+  if (data.error) return <div>{data.message}</div>;
+
   return (
     <>
       <Nav />
-      <div className="flex items-center h-[90vh] ">
+      <div className="flex items-center ">
         <div className="w-[40rem] m-8 p-4 flex flex-col items-center gap-3 ">
           <img
             className="w-[20rem] m-4 rounded-xl shadow-xl"
-            src="https://comicsense.b-cdn.net/wp-content/uploads/2021/03/7th_hokage1_copy_compressed.jpg"
+            src={data.image[0]}
             ref={imageRef}
             alt=""
           />
 
           <div className="flex items-center justify-center gap-4">
-            {imgc.map((data) => (
+            {data.image.map((img) => (
               <img
                 className="w-[10%] rounded-lg cursor-pointer hover:scale-[1.1]"
-                onClick={()=>imageRef.current.src=data}
-                src={data}
+                onClick={() => (imageRef.current.src = img)}
+                src={img}
                 alt=""
               />
             ))}
@@ -40,24 +56,53 @@ const Items = () => {
         </div>
 
         <div className="flex flex-col justify-start  w-[50rem] p-8">
-          <h1 className="m-2 text-3xl font-semibold">
-            7th Hokage (Half sleeve)
-          </h1>
-          <p className=" m-2 text-xl font-bold text-red-700">&#8377;699.00</p>
+          <h1 className="m-2 text-3xl font-semibold">{data.name}</h1>
+          <p className=" m-2 text-xl font-bold text-red-700">
+            &#8377;{data.price}
+          </p>
           <div>
             <h1 className="text-2xl font-bold m-2">Product Description</h1>
             <ul className="text-xl font-semibold list-disc m-4 px-4 ">
-              <li>180 GSM, 100% Cotton, Pre-Shrunk &amp; Bio-Washed Fabric</li>
-              <li>Screen Printed</li>
-              <li>Regular Fit</li>
-              <li>
-                Colors may vary due to photography and your screen setting
-              </li>
+              {data.description.map((e) => (
+                <li>{e}</li>
+              ))}
             </ul>
           </div>
-          <div className=" m-2 flex gap-4">
-            <button className="bg-orange-600 text-xl text-white font-semibold p-2 rounded-lg hover:scale-[1.1]">
-              Add to Cart
+          <div className="text-2xl font-bold m-1 p-2 w-[60%]  ">
+            <button
+              className="p-2 px-4 bg-green-500 rounded-xl"
+              onClick={() => {
+                if (quantity <= 0) {
+                  setQuantity(0);
+                } else {
+                  setQuantity(quantity - 1);
+                }
+              }}
+            >
+              -
+            </button>
+            <span className="p-2 px-4 ">{quantity}</span>
+            <button
+              className="p-2 px-4 bg-green-500 rounded-xl"
+              onClick={() => setQuantity(quantity + 1)}
+            >
+              +
+            </button>
+            <span className="p-2 px-4 text-red-700">
+              &#8377; {data.price * quantity}
+            </span>
+          </div>
+
+          <div className=" m-2 flex gap-4 mb-12">
+            <button
+              className="bg-orange-600 text-xl text-white font-semibold p-2 rounded-lg hover:scale-[1.1]"
+              onClick={() => {
+                setCount(count + 1);
+                if (count % 2 != 0) setCarttext("Remove");
+                else setCarttext("Add to Cart");
+              }}
+            >
+              {carttext}
             </button>
             <button className="bg-green-700 text-xl text-white font-semibold p-2 rounded-lg hover:scale-[1.1]">
               Buy Now
