@@ -11,7 +11,7 @@ export default function App({
       <Head>
         <script
           src="https://kit.fontawesome.com/97cafe4b3f.js"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
       </Head>
       <Component {...pageProps} />

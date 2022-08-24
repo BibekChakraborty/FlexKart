@@ -44,8 +44,8 @@ const Items = () => {
           />
 
           <div className="flex items-center justify-center gap-4">
-            {data.image.map((img) => (
-              <img
+            {data.image.map((img,i) => (
+              <img key={i}
                 className="w-[10%] rounded-lg cursor-pointer hover:scale-[1.1]"
                 onClick={() => (imageRef.current.src = img)}
                 src={img}
@@ -63,8 +63,8 @@ const Items = () => {
           <div>
             <h1 className="text-2xl font-bold m-2">Product Description</h1>
             <ul className="text-xl font-semibold list-disc m-4 px-4 ">
-              {data.description.map((e) => (
-                <li>{e}</li>
+              {data.description.map((e,i) => (
+                <li key={i}>{e}</li>
               ))}
             </ul>
           </div>

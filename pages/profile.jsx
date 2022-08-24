@@ -4,7 +4,7 @@ import Nav from "../Components/nav";
 import Footer from "../Components/footer";
 import Image from "next/image";
 
-const profile = () => {
+const Profile = () => {
   const { data, status } = useSession();
 
   useEffect(() => {
@@ -43,4 +43,4 @@ const profile = () => {
   );
 };
 
-export default profile;
+export default Profile;
