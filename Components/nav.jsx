@@ -40,7 +40,7 @@ const Nav = () => {
 
         <div className="flex item-center ">
           <input
-            className="text-xl m-3 p-2 w-75 rounded-3xl text-black outline-none"
+            className="text-xl m-3 p-2 w-75 rounded-3xl text-black outline-none placeholder:px-2"
             type="search"
             name=""
             id="searchbar"
@@ -66,14 +66,15 @@ const Nav = () => {
               <i
                 className="fa-solid fa-cart-shopping cursor-pointer"
                 onClick={() => {
-                  if (session) {
-                    setCount(count + 1);
-                    console.log(count);
-                    if (count % 2 != 0) setShow2(true);
-                    else setShow2(false);
-                  } else {
-                    signIn();
-                  }
+                  // if (session) {
+                  //   setCount(count + 1);
+                  //   console.log(count);
+                  //   if (count % 2 != 0) setShow2(true);
+                  //   else setShow2(false);
+                  // } else {
+                  //   signIn();
+                  // }
+                  alert('Feature coming soon...')
                 }}
                   
               ></i>
