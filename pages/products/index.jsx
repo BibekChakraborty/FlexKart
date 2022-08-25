@@ -3,8 +3,10 @@ import Footer from "../../Components/footer";
 import Nav from "../../Components/nav";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSession, signIn } from "next-auth/react";
 
 const Product = () => {
+  const { data: session } = useSession();
   const router = useRouter();
   const [products, setProducts] = useState(null);
   const [categories, setCategories] = useState(null);
@@ -59,9 +61,15 @@ const Product = () => {
                   <button
                     className="bg-amber-500 text-white p-2 px-3 hover:scale-[1.1] font-semibold rounded-3xl"
                     onClick={() => {
-                      router.push(
-                        `/products/checkout?productid=${product._id}&quantity=1`
-                      );
+                      if (session) {
+                        if (quantity === 0)
+                          return alert("quantity cannot be 0");
+                        router.push(
+                          `/products/checkout?productid=${product._id}&quantity=1`
+                        );
+                      } else {
+                        signIn();
+                      }
                     }}
                   >
                     Buy Now

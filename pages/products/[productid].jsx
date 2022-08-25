@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import Nav from "../../Components/nav";
 import Footer from "../../Components/footer";
 import { useRouter } from "next/router";
+import { useSession, signIn } from "next-auth/react";
 
 const Items = () => {
+  const { data: session } = useSession();
   const router = useRouter();
   const imageRef = useRef();
   const [data, setData] = useState(null);
@@ -110,11 +112,14 @@ const Items = () => {
             <button
               className="bg-green-700 text-xl text-white font-semibold p-2 rounded-lg hover:scale-[1.1]"
               onClick={() => {
-                if (quantity === 0) return alert("quantity cannot be 0");
-
-                router.push(
-                  `/products/checkout?productid=${router.query.productid}&quantity=${quantity}`
-                );
+                if (session) {
+                  if (quantity === 0) return alert("quantity cannot be 0");
+                  router.push(
+                    `/products/checkout?productid=${router.query.productid}&quantity=${quantity}`
+                  );
+                } else {
+                  signIn();
+                }
               }}
             >
               Buy Now
