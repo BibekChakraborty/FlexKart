@@ -86,7 +86,7 @@ const Nav = () => {
       <div
         className={
           show2
-            ? `w-36 rounded-lg absolute right-2 top-[4.9rem] border border-gray-400 z-10 p-4 bg-black gap-2 text-white font-semibold flex flex-col justify-start items-start`
+            ? `w-36 rounded-lg fixed top-20 right-8 border border-gray-400 z-10 p-4 bg-black gap-2 text-white font-semibold flex flex-col justify-start items-start`
             : `hidden`
         }
       >
