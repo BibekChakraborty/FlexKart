@@ -18,7 +18,7 @@ const Nav = () => {
         ></script>
       </Head>
 
-      <nav className="flex justify-between text-white h-[4.8rem] items-center gap-2 sticky top-0 bg-black">
+      <nav className="flex justify-between text-white h-[4.8rem] items-center gap-2 sticky top-0 z-10 bg-black">
         <h1 className="text-3xl font-bold m-3 font-serif">
           <span>Fle</span>
           <span className="text-blue-500">x</span>

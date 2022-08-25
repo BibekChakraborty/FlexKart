@@ -15,7 +15,7 @@ export default function Home() {
       <Nav />
       <div>
         <Image src={landingimg} alt="" />
-        <div className="flex flex-col gap-4 justify-center items-center absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10 ">
+        <div className="flex flex-col gap-4 justify-center items-center absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 ">
           <h1 className="bg-white/50 text-black text-3xl w-[16rem] p-6 text-center font-extrabold rounded-xl">
             __Categories__
           </h1>
