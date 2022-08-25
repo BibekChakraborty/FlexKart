@@ -62,8 +62,6 @@ const Product = () => {
                     className="bg-amber-500 text-white p-2 px-3 hover:scale-[1.1] font-semibold rounded-3xl"
                     onClick={() => {
                       if (session) {
-                        if (quantity === 0)
-                          return alert("quantity cannot be 0");
                         router.push(
                           `/products/checkout?productid=${product._id}&quantity=1`
                         );
