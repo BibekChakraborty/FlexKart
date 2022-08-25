@@ -27,6 +27,12 @@ const Items = () => {
     router.isReady && fetchData();
   }, [router]);
 
+  useEffect(() => {
+    console.log(count);
+    if (count % 2 != 0) setCarttext("Remove");
+    else setCarttext("Add to Cart");
+  }, [count]);
+
   if (!data) return null;
 
   if (data.error) return <div>{data.message}</div>;
@@ -35,7 +41,7 @@ const Items = () => {
     <>
       <Nav />
       <div className="flex items-center ">
-        <div className="w-[40rem] m-8 p-4 flex flex-col items-center gap-3 ">
+        <div className="w-[40rem] m-12 p-4 flex flex-col items-center gap-3 ">
           <img
             className="w-[20rem] m-4 rounded-xl shadow-xl"
             src={data.image[0]}
@@ -44,8 +50,9 @@ const Items = () => {
           />
 
           <div className="flex items-center justify-center gap-4">
-            {data.image.map((img,i) => (
-              <img key={i}
+            {data.image.map((img, i) => (
+              <img
+                key={i}
                 className="w-[10%] rounded-lg cursor-pointer hover:scale-[1.1]"
                 onClick={() => (imageRef.current.src = img)}
                 src={img}
@@ -63,7 +70,7 @@ const Items = () => {
           <div>
             <h1 className="text-2xl font-bold m-2">Product Description</h1>
             <ul className="text-xl font-semibold list-disc m-4 px-4 ">
-              {data.description.map((e,i) => (
+              {data.description.map((e, i) => (
                 <li key={i}>{e}</li>
               ))}
             </ul>
@@ -96,15 +103,20 @@ const Items = () => {
           <div className=" m-2 flex gap-4 mb-12">
             <button
               className="bg-orange-600 text-xl text-white font-semibold p-2 rounded-lg hover:scale-[1.1]"
-              onClick={() => {
-                setCount(count + 1);
-                if (count % 2 != 0) setCarttext("Remove");
-                else setCarttext("Add to Cart");
-              }}
+              onClick={() => setCount(count + 1)}
             >
               {carttext}
             </button>
-            <button className="bg-green-700 text-xl text-white font-semibold p-2 rounded-lg hover:scale-[1.1]">
+            <button
+              className="bg-green-700 text-xl text-white font-semibold p-2 rounded-lg hover:scale-[1.1]"
+              onClick={() => {
+                if (quantity === 0) return alert("quantity cannot be 0");
+
+                router.push(
+                  `/products/checkout?productid=${router.query.productid}&quantity=${quantity}`
+                );
+              }}
+            >
               Buy Now
             </button>
           </div>

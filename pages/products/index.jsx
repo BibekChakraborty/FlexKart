@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 
 const Product = () => {
   const router = useRouter();
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState(null);
+  const [categories, setCategories] = useState(null);
 
   const fetchProducts = async () => {
     const res = await fetch("/api/product");
@@ -32,7 +32,7 @@ const Product = () => {
     <>
       <Nav />
 
-      {categories.map((category) => (
+      {categories?.map((category) => (
         <React.Fragment key={category}>
           <h1 className=" text-center mx-12 font-extrabold text-4xl m-2 mt-8">
             __ {category} __
@@ -56,7 +56,14 @@ const Product = () => {
                   <p className="text-green-500 font-semibold">
                     &#8377;{product.price}
                   </p>
-                  <button className="bg-amber-500 text-white p-2 px-3 hover:scale-[1.1] font-semibold rounded-3xl">
+                  <button
+                    className="bg-amber-500 text-white p-2 px-3 hover:scale-[1.1] font-semibold rounded-3xl"
+                    onClick={() => {
+                      router.push(
+                        `/products/checkout?productid=${product._id}&quantity=1`
+                      );
+                    }}
+                  >
                     Buy Now
                   </button>
                 </div>
@@ -67,9 +74,11 @@ const Product = () => {
 
       <div className="h-24 m-16 p-4 grid place-items-center">
         <h1 className="text-2xl font-extrabold p-2">
-          {categories.length > 0
-            ? "More Products Coming Soon..."
-            : "Oops we don't have this category yet"}
+          {categories
+            ? categories.length > 0
+              ? "More Products Coming Soon..."
+              : "Oops we don't have this category yet"
+            : "Loading..."}
         </h1>
       </div>
 

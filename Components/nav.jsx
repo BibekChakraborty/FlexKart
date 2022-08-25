@@ -46,7 +46,7 @@ const Nav = () => {
             id="searchbar"
             placeholder="Search for the item..."
           />
-          <ul className="flex gap-4 items-center text-lg m-3">
+          <ul className="flex gap-4 items-center text-lg m-3 mr-4">
             <li>
               <i
                 className="fa-solid fa-user cursor-pointer"
@@ -102,6 +102,8 @@ const Nav = () => {
           Logout
         </button>
       </div>
+
+
 
       {/*login Popup*/}
       <div

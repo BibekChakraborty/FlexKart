@@ -1,8 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../../Components/nav";
 import Footer from "../../Components/footer";
+import { useRouter } from "next/router";
+
 const Checkout = () => {
+  const router = useRouter();
+  const [data, setData] = useState(null);
   const [buy, setBuy] = useState(true);
+
+  const fetchData = async () => {
+    const res = await fetch(`/api/product/${router.query.productid}`);
+    const data = await res.json();
+
+    if (res.status !== 200) return setData({ ...data, error: true });
+
+    data.image = JSON.parse(data.image);
+    data.description = JSON.parse(data.description);
+
+    setData(data);
+  };
+
+  useEffect(() => {
+    router.isReady && fetchData();
+  }, [router]);
+
+  if (!data) return null;
 
   return (
     <>
@@ -13,11 +35,11 @@ const Checkout = () => {
           buy
             ? `hidden`
             : `bg-slate-200 grid place-items-center m-auto my-8 p-8 w-[60%] gap-2 rounded-lg text-2xl font-bold text-green-800`
-        }>
+        }
+      >
         Order Placed Successfully.
       </div>
-      
-      
+
       <div
         className={
           buy
@@ -25,8 +47,8 @@ const Checkout = () => {
             : `hidden`
         }
       >
-        <h1 className="m-2 p-2 text-2xl font-bold place-items-start ">
-          Fill up the Shipping Details
+        <h1 className="m-2 p-2 text-2xl font-bold place-items-start text-center">
+          Fill up the Shipping Details for {data.name}
         </h1>
         <div className="flex gap-1">
           <input
@@ -80,11 +102,11 @@ const Checkout = () => {
           </h1>
           <div className="text-xl font-semibold w-60 ">
             <h5 className="float-right text-green-700 font-bold">
-              &#8377; 125
+              &#8377; {data.price * router.query.quantity}
             </h5>
             <h5>Cart Total: </h5>
             <h5 className="float-right text-green-700 font-bold">
-              &#8377; 125
+              &#8377; {data.price * router.query.quantity}
             </h5>
             <h5>Total Payable: </h5>
           </div>
