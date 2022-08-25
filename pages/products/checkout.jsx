@@ -40,7 +40,10 @@ const Checkout = () => {
         Order Placed Successfully.
       </div>
 
-      <div
+      <form onSubmit={(e) => {
+            e.preventDefault();
+            setBuy(false)}
+          }
         className={
           buy
             ? `bg-slate-200 grid place-items-center m-auto my-8 p-8 w-[60%] gap-2 rounded-lg`
@@ -48,7 +51,7 @@ const Checkout = () => {
         }
       >
         <h1 className="m-2 p-2 text-2xl font-bold place-items-start text-center">
-          Fill up the Shipping Details for {data.name}
+          Fill up the Shipping Details for {data.name} x{router.query.quantity}
         </h1>
         <div className="flex gap-1">
           <input
@@ -57,6 +60,8 @@ const Checkout = () => {
             type="text"
             name="name"
             id="name"
+            required
+          
           />
           <input
             className="w-[25rem] rounded-lg border-black border text-xl p-1 placeholder:px-2"
@@ -64,6 +69,7 @@ const Checkout = () => {
             type="number"
             name=""
             id=""
+            required
           />
         </div>
         <input
@@ -72,6 +78,7 @@ const Checkout = () => {
           type="text"
           name="address"
           id="address"
+          required
         />
         <div className="flex justify-evenly gap-2">
           <input
@@ -80,6 +87,8 @@ const Checkout = () => {
             type="text"
             name="city"
             id="city"
+            required
+            
           />
           <input
             className="w-[16rem] rounded-lg border-black border text-xl p-1 placeholder:px-2"
@@ -87,6 +96,7 @@ const Checkout = () => {
             type="text"
             name="state"
             id="state"
+            required
           />
           <input
             className="w-[16rem] rounded-lg border-black border text-xl p-1 placeholder:px-2"
@@ -94,6 +104,7 @@ const Checkout = () => {
             type="number"
             name="pin"
             id="pin"
+            required
           />
         </div>
         <div className="w-[50rem] flex justify-between p-4">
@@ -111,13 +122,12 @@ const Checkout = () => {
             <h5>Total Payable: </h5>
           </div>
         </div>
-        <button
+        <button type="submit"
           className="bg-green-700 active:bg-green-600 place-self-end rounded-lg text-white p-3 text-xl font-semibold hover:scale-110"
-          onClick={() => setBuy(false)}
-        >
+          >
           Proceed to Checkout
         </button>
-      </div>
+      </form>
       <Footer />
     </>
   );
