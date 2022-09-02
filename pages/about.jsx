@@ -18,14 +18,14 @@ const about = () => {
             Fullstack Web Developer
           </h3>
           <div className="flex justify-center text-2xl m-4 items-center gap-4">
-            <a href="https://www.instagram.com/_b.i.b.e.k._/" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-instagram"></i>
+            <a href="https://www.instagram.com/_b.i.b.e.k._/" target="_blank" rel="noopener noreferrer">
+              <i className="fa-brands fa-instagram"></i>
             </a>
-            <a href="https://github.com/BibekChakraborty" target="_blank" rel="noreferrer">
-            <i class="fa-brands fa-github"></i>
+            <a href="https://github.com/BibekChakraborty" target="_blank" rel="noopener noreferrer">
+            <i className="fa-brands fa-github"></i>
             </a>
-            <a href="mailto:bibekbibek0612@gmail.com" target="_blank" rel="noreferrer">
-            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:bibekbibek0612@gmail.com" target="_blank" rel="noopener noreferrer">
+            <i className="fa-solid fa-envelope"></i>
             </a>
           </div>
         </div>
