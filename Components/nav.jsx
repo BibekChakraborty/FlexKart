@@ -24,7 +24,6 @@ const Nav = () => {
           <span className="text-blue-500">x</span>
           <span>Kar</span>
           <span className="text-blue-500">t🉐</span>
-          
         </h1>
         <div className="flex gap-7 text-l m-3">
           <Link href="/">
@@ -34,8 +33,9 @@ const Nav = () => {
           <Link href="/products">
             <a>All Products</a>
           </Link>
-
-          <a href="">About Us</a>
+          <Link href="/about">
+            <a href="">About</a>
+          </Link>
         </div>
 
         <div className="flex item-center ">
@@ -74,9 +74,8 @@ const Nav = () => {
                   // } else {
                   //   signIn();
                   // }
-                  alert('Feature coming soon...')
+                  alert("Feature coming soon...");
                 }}
-                  
               ></i>
             </li>
           </ul>
@@ -103,8 +102,6 @@ const Nav = () => {
           Logout
         </button>
       </div>
-
-
 
       {/*login Popup*/}
       <div

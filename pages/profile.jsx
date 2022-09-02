@@ -32,10 +32,18 @@ const Profile = () => {
               <span className="text-2xl font-bold">{data?.user.name}</span>
             </div>
             <div className="p-2">
-              <span className="text-2xl text-green-900 font-bold">Email : </span>
+              <span className="text-2xl text-green-900 font-bold">
+                Email :{" "}
+              </span>
               <span className="text-2xl font-bold">{data?.user.email}</span>
             </div>
           </div>
+        </div>
+        <h1 className="text-4xl m-2 mt-4 font-bold text-[#002B5B]">
+          __Order History__
+        </h1>
+        <div className="mt-4 p-12 border-2 bg-slate-200 rounded-xl w-[30rem]">
+          <h3 className="text-2xl font-bold">Feature coming real soon...</h3>
         </div>
       </div>
       <Footer />
